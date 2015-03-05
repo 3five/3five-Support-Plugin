@@ -8,7 +8,7 @@
  * @wordpress-plugin
  * Plugin Name:       3five Support
  * Plugin URI:        http://3five.com
- * Description:       This is a short description of what the plugin does. It's displayed in the WordPress dashboard.
+ * Description:       3five WordPress Dashboard Support Ticket generator.
  * Version:           1.0.0
  * Author:            3five, VincentListrani
  * Author URI:        http://3five.com
@@ -67,7 +67,4 @@ function run_threefive_support() {
 }
 run_threefive_support();
 
-$updater = new ThreeFiveSupportGitUpdater( __FILE__, '3five', "3five-support-plugin" );
-echo '<pre>';
-print_r($updater);
-echo '</pre>';
+new ThreeFiveSupportGitUpdater( __FILE__, '3five', "3five-Support-Plugin" );
