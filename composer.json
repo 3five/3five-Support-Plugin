@@ -1,0 +1,23 @@
+{
+  "name": "3five/threefive-support",
+  "type": "wordpress-plugin",
+  "authors": [
+    {
+      "name": "Vincent Listrani",
+      "email": "vincent@3five.com",
+      "homepage": "http://3five.com",
+      "role": "Lead WordPress Developer"
+    }
+  ],
+  "description": "3five WordPress Dashboard Support Ticket generator.",
+  "license": "GPL-2.0",
+  "require": {
+    "composer/installers": "~1.0"
+  },
+  "extra": {
+    "installer-paths": {
+        "./content/plugins/threefive-support/": ["type:wordpress-plugin"]
+    }
+  }
+}
+  
