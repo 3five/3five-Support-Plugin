@@ -1,5 +1,4 @@
 <?php
-
 /**
  * @link              http://3five.com
  * @since             1.0.0
@@ -67,4 +66,4 @@ function run_threefive_support() {
 }
 run_threefive_support();
 
-new ThreeFiveSupportGitUpdater( __FILE__, '3five', "3five-Support-Plugin" );
+new ThreeFiveSupportGitUpdater( __FILE__, '3five', '3five-Support-Plugin' );
