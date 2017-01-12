@@ -52,16 +52,19 @@
                 errorMsg = "You can only upload a maximum of 3 files";
             }
 
+            // Check the file list for issues before submitting.
             $fileUpload.each(function () {
                 var thisFile = $(this);
                 var fileSize = thisFile[0].files[0].size;
                 var fileType = thisFile[0].files[0].type;
 
+                // Maximum of 2MB per file.
                 if ( fileSize > 2097152 ) {
                     fieldValues.push('false');
                     errorMsg = "One or more of your files is larger than 2MB please reduce the size of your files before uploading.";
                 }
 
+                // Supported file types are jpg, gif, png and pdf.
                 switch ( fileType  ) {
                     case 'application/pdf':
                     case 'image/png':

@@ -69,7 +69,7 @@ class Threefive_Support_Admin {
 		 */
 		add_meta_box( 'threefive_support_widget', 'Get 3five Support', array(
 			$this,
-			'threefive_support_dashboard_widget'
+			'threefive_support_dashboard_widget',
 		), 'dashboard', 'normal', 'high' );
 	}
 
@@ -100,7 +100,7 @@ class Threefive_Support_Admin {
 	public function threefive_support_dashboard_widget_handler() {
 		global $get_updates, $wp_version;
 
-		// $_POST vars
+		// $_POST vars.
 		$email        = esc_html( $_POST['email'] );
 		$name         = esc_html( $_POST['name'] );
 		$message_body = esc_html( $_POST['message'] );
@@ -110,10 +110,10 @@ class Threefive_Support_Admin {
 		$themes    = $get_updates['counts']['themes'];
 		$wordpress = $get_updates['counts']['wordpress'];
 
-		// Additional Stats
+		// Additional Stats.
 		$browser = $_SERVER['HTTP_USER_AGENT'];
 
-		// Build the message body
+		// Build the message body.
 		$message = 'Support Request Details:' . PHP_EOL;
 		$message .= $message_body . PHP_EOL . PHP_EOL;
 		$message .= 'WordPress Site Statistics:' . PHP_EOL;
@@ -135,6 +135,11 @@ class Threefive_Support_Admin {
 		die( 'Great Success!' );
 	}
 
+	/**
+	 * Get a any available update for this site and add it to the email body.
+	 *
+	 * @return array
+	 */
 	public function get_wp_updates() {
 		if ( function_exists( 'wp_get_update_data' ) ) {
 			global $get_updates;
