@@ -15,7 +15,7 @@
 
 <!-- This file should primarily consist of HTML with a little bit of PHP. -->
 
-<?php 
+<?php
 	$current_user = wp_get_current_user();
 
 	$email = $current_user->user_email;
@@ -39,20 +39,27 @@
 			<input type="text" name="tf_your_email" id="tf_your_email" class="required" placeholder="Email" value="<?php if( !empty($email) ? _e($email) : '' );?>">
 		</label>
 	</div>
-	
+
 	<div class="input-text-wrap">
 		<label for="tf_your_name">
 			Name <span class="is-required">*</span>
 			<input type="text" name="tf_your_name" id="tf_your_name" class="required" placeholder="Name" value="<?php if( !empty($name) ? _e($name) : '' );?>">
 		</label>
 	</div>
-	
+
 	<div id="description-wrap" class="textarea-wrap">
 		<label for="tf_support_request_msg">
 			Your Request <span class="is-required">*</span>
 			<textarea name="tf_support_request_msg" id="tf_support_request_msg" class="required" cols="15" rows="6" placeholder="What can we help you with?"></textarea>
 		</label>
 	</div>
+
+    <div class="input-text-wrap">
+        <label for="tf_support_request_files[]">
+            Files (Maximum 3)
+            <input type="file" name="tf_support_request_files[]" id="tf_support_request_files" multiple>
+        </label>
+    </div>
 
 	<input type="submit" name="tf_support_submit" id="tf_support_submit" class="button button-primary button-hero" value="Get Support">
 	<div class="loader"></div>
