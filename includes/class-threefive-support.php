@@ -69,7 +69,7 @@ class Threefive_Support {
 	public function __construct() {
 
 		$this->threefive_support = 'threefive-support';
-		$this->version           = '1.0.0';
+		$this->version           = '1.1.0';
 
 		$this->load_dependencies();
 		$this->set_locale();
