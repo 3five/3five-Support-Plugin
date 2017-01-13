@@ -55,7 +55,7 @@
 	</div>
 
     <div class="input-text-wrap">
-        <label for="tf_support_request_files[]">
+        <label for="tf_support_request_files">
             Files (Maximum 3)
             <input type="file" name="tf_support_request_files[]" id="tf_support_request_files" multiple>
         </label>

@@ -4,7 +4,7 @@
  * The dashboard-specific functionality of the plugin.
  *
  * @link       http://3five.com
- * @since      1.0.0
+ * @since      1.1.0
  *
  * @package    Threefive_Support
  * @subpackage Threefive_Support/admin
@@ -101,17 +101,22 @@ class Threefive_Support_Admin {
 		global $get_updates, $wp_version;
 
 		// $_POST vars.
-		$email        = esc_html( $_POST['email'] );
+		$email        = esc_html( $_POST['email'] ); // @codingStandardsIgnoreStart
 		$name         = esc_html( $_POST['name'] );
 		$message_body = esc_html( $_POST['message'] );
+		$files        = $_FILES['files']; // @codingStandardsIgnoreEnd
+
+		// Must have email parameters.
+		$to          = 'wpsupport@3five.com';
+		$subject     = 'Support Request From ' . $name . ' at ' . get_bloginfo( 'name' ) . '.';
+		$headers[]   = 'Content-Type: text/html; charset=UTF-8';
+		$headers[]   = 'From: ' . $name . ' <' . $email . '>';
+		$attachments = array();
 
 		// Add WP Stats to the message field.
 		$plugins   = $get_updates['counts']['plugins'];
 		$themes    = $get_updates['counts']['themes'];
 		$wordpress = $get_updates['counts']['wordpress'];
-
-		// Additional Stats.
-		$browser = $_SERVER['HTTP_USER_AGENT'];
 
 		// Build the message body.
 		$message = 'Support Request Details:' . PHP_EOL;
@@ -122,15 +127,42 @@ class Threefive_Support_Admin {
 		$message .= 'Core Updates available: ' . $wordpress . PHP_EOL;
 		$message .= 'Plugin Updates available: ' . $plugins . PHP_EOL;
 		$message .= 'Theme Updates available: ' . $themes . PHP_EOL;
-		$message .= 'Using Browser: ' . $browser . PHP_EOL;
 
-		// Constants.
-		$to        = 'wpsupport@3five.com';
-		$subject   = 'Support Request From ' . $name . ' at ' . get_bloginfo( 'name' ) . '.';
-		$headers[] = 'Content-Type: text/html; charset=UTF-8';
-		$headers[] = 'From: ' . $name . ' <' . $email . '>';
+		if ( ! function_exists( 'wp_handle_upload' ) ) {
+			require_once( ABSPATH . 'wp-admin/includes/file.php' );
+		}
 
-		wp_mail( $to, $subject, $message, $headers );
+		// Change the upload directory for these files.
+		add_filter( 'upload_dir', array( $this, 'tf_support_upload_dir' ) );
+
+		$uploadedfiles    = $files;
+		$upload_overrides = array( 'test_form' => false );
+
+		foreach ( $uploadedfiles['name'] as $key => $value ) {
+			if ( $uploadedfiles['name'][ $key ] ) {
+				$uploadedfile = array(
+					'name'     => $files['name'][ $key ],
+					'type'     => $files['type'][ $key ],
+					'tmp_name' => $files['tmp_name'][ $key ],
+					'error'    => $files['error'][ $key ],
+					'size'     => $files['size'][ $key ],
+				);
+
+				$movefile = wp_handle_upload( $uploadedfile, $upload_overrides );
+
+				if ( $movefile && ! isset( $movefile['error'] ) ) {
+					$attachments[] = $movefile['file'];
+				} else {
+					echo 'yo';
+				}
+			}
+		}
+
+		// Send the email out.
+		wp_mail( $to, $subject, $message, $headers, $attachments );
+
+		// Change the upload directory back to the original directory.
+		remove_filter( 'upload_dir', array( $this, 'tf_support_upload_dir' ) );
 
 		die( 'Great Success!' );
 	}
@@ -149,6 +181,21 @@ class Threefive_Support_Admin {
 		}
 	}
 
+	/**
+	 * Change the upload directory for support attachments.
+	 *
+	 * @param array $dirs an array of paths for uploads to go to.
+	 *
+	 * @return mixed
+	 */
+	public function tf_support_upload_dir( $dirs ) {
+		$tf_support_dir = '/tf-support-uploads';
+
+		$dirs['path']   = $dirs['basedir'] . $tf_support_dir;
+		$dirs['url']    = $dirs['baseurl'] . $tf_support_dir;
+
+		return $dirs;
+	}
 	/**
 	 * Register the stylesheets for the Dashboard.
 	 *
@@ -195,5 +242,4 @@ class Threefive_Support_Admin {
 		wp_localize_script( $this->threefive_support, 'wpAdminAjax', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
 
 	}
-
 }
