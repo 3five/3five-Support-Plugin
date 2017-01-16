@@ -1,9 +1,9 @@
 === Plugin Name ===
 Contributors: 3five, VincentListrani
 Donate link: 
-Tags: support, helpspot
+Tags: support, help desk, FreshDesk
 Requires at least: 4.1
-Tested up to: 4.1.1
+Tested up to: 4.7.1
 Stable tag: 1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html

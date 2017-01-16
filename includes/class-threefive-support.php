@@ -35,7 +35,7 @@ class Threefive_Support {
 	 *
 	 * @since    1.0.0
 	 * @access   protected
-	 * @var      Threefive_Support_Loader    $loader    Maintains and registers all hooks for the plugin.
+	 * @var      Threefive_Support_Loader $loader Maintains and registers all hooks for the plugin.
 	 */
 	protected $loader;
 
@@ -44,7 +44,7 @@ class Threefive_Support {
 	 *
 	 * @since    1.0.0
 	 * @access   protected
-	 * @var      string    $threefive_support    The string used to uniquely identify this plugin.
+	 * @var      string $threefive_support The string used to uniquely identify this plugin.
 	 */
 	protected $threefive_support;
 
@@ -53,7 +53,7 @@ class Threefive_Support {
 	 *
 	 * @since    1.0.0
 	 * @access   protected
-	 * @var      string    $version    The current version of the plugin.
+	 * @var      string $version The current version of the plugin.
 	 */
 	protected $version;
 
@@ -69,7 +69,7 @@ class Threefive_Support {
 	public function __construct() {
 
 		$this->threefive_support = 'threefive-support';
-		$this->version = '1.0.0';
+		$this->version           = '1.1.0';
 
 		$this->load_dependencies();
 		$this->set_locale();
@@ -118,13 +118,13 @@ class Threefive_Support {
 		 * side of the site.
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-threefive-support-public.php';
-		
+
 		/**
 		 * The class responsible for defining all actions that occur in the public-facing
 		 * side of the site.
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-threefive-support-updater.php';
-		
+
 		$this->loader = new Threefive_Support_Loader();
 
 	}
@@ -160,11 +160,11 @@ class Threefive_Support {
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
-		
-		// Ajax calls for admin form
+
+		// Ajax calls for admin form.
 		$this->loader->add_action( 'wp_ajax_nopriv_threefive_ajax_send_mail', $plugin_admin, 'threefive_support_dashboard_widget_handler' );
-        $this->loader->add_action( 'wp_ajax_threefive_ajax_send_mail', $plugin_admin, 'threefive_support_dashboard_widget_handler' );
-        $this->loader->add_action( 'admin_init', $plugin_admin, 'get_wp_updates' );
+		$this->loader->add_action( 'wp_ajax_threefive_ajax_send_mail', $plugin_admin, 'threefive_support_dashboard_widget_handler' );
+		$this->loader->add_action( 'admin_init', $plugin_admin, 'get_wp_updates' );
 
 	}
 
@@ -176,6 +176,8 @@ class Threefive_Support {
 	 * @access   private
 	 */
 	private function define_public_hooks() {
+
+		return; // Currently disabled until a use is determined for a public facing version of this plugin.
 
 		$plugin_public = new Threefive_Support_Public( $this->get_threefive_support(), $this->get_version() );
 
@@ -223,5 +225,4 @@ class Threefive_Support {
 	public function get_version() {
 		return $this->version;
 	}
-
 }
