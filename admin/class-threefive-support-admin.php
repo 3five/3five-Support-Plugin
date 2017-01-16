@@ -94,7 +94,7 @@ class Threefive_Support_Admin {
 	 *
 	 * - Used as the form POST handler
 	 *
-	 * @since  1.0.0
+	 * @since  1.1.0
 	 * @access public
 	 */
 	public function threefive_support_dashboard_widget_handler() {
@@ -186,6 +186,7 @@ class Threefive_Support_Admin {
 	 *
 	 * @param array $dirs an array of paths for uploads to go to.
 	 *
+	 * @since 1.1.0
 	 * @return mixed
 	 */
 	public function tf_support_upload_dir( $dirs ) {
