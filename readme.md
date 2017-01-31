@@ -4,11 +4,24 @@ This plugin connects to our FreshDesk system by sending an email from a WordPres
 
 #### Changelog
 
-**1.1**
-* Cleaned up some PHPCS notices and returned public method early to stop loading files on the front end.
-* Added the Content-Type header for the outgoing email.
-* Added full support for multiple file upload. Files are sent to a custom folder in the WP install and then added as attachments. 
+**1.2.2**
+
+* Readme and composer file minor updates. Fixes version number issue on the WP Admin.
+
+**1.2.1**
+
+* Added composer support.
+
+**1.2**
+
+* Added full support for multiple file upload. Files are sent to a custom folder in the WP install and then added as attachments.
 * Changed the email address to the new FreshDesk email.
 
+**1.1**
+
+* Cleaned up some PHPCS notices and returned public method early to stop loading files on the front end.
+* Added the Content-Type header for the outgoing email.
+
 **1.0**
+
 * Initial Release
