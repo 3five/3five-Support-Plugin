@@ -4,7 +4,7 @@ Donate link:
 Tags: support, help desk, FreshDesk
 Requires at least: 4.1
 Tested up to: 4.7.1
-Stable tag: 1.2.2
+Stable tag: 1.2.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -28,6 +28,9 @@ This plugin is designed to submit support tickets directly to the 3five support 
 There are no screenshots at this time.
 
 == Changelog ==
+
+= 1.2.3 =
+* Bugfix for file upload field. Was returning a blocking error when submitting without a file attached.
 
 = 1.2.2 =
 * Readme and composer file minor updates. Fixes version number issue on the WP Admin.

@@ -4,6 +4,10 @@ This plugin connects to our FreshDesk system by sending an email from a WordPres
 
 #### Changelog
 
+**1.2.3**
+
+* Bugfix for file upload field. Was returning a blocking error when submitting without a file attached.
+
 **1.2.2**
 
 * Readme and composer file minor updates. Fixes version number issue on the WP Admin.

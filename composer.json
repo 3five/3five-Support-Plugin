@@ -1,7 +1,7 @@
 {
   "name": "3five/threefive-support",
   "type": "wordpress-plugin",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "require": {
     "composer/installers": "~1.0"
   },
